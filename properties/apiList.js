@@ -1,4 +1,4 @@
 module.exports = {
-    apiList : '',
+    apiListContext : 'https://api.neople.co.kr/df/servers',
     
 }
