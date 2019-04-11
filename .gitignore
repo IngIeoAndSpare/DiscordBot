@@ -1,4 +1,4 @@
 node_modules/
 *.dll
 *.exe
-/properties/token.json
+properties/token.json
