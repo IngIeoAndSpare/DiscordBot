@@ -1,5 +1,5 @@
 // ===== module ======================
-const discord = require('discord.js')
+const discord = require('discord.js'),
       axios = require('axios');
 //      bufferutil = require('bufferutil'),
 //      crypto = require('crypto');
