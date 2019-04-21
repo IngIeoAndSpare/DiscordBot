@@ -13,7 +13,7 @@ const request = require('request');
 const preFix = '~';
 
 // 던파 API key url
-const APIKEY = apiUrl.apiKey + token.dfToken;
+const DF_APIKEY = apiUrl.apiKey + token.dfToken;
 
 // 실제 명령어 구현
 var Command = {};
@@ -46,6 +46,9 @@ client.on("message", message => {
 
 Command['경매'] = function(message, cmdLine){
     console.log('경매장 조회');
+    // XXX: cmdLine params 값 확인 필요.
+
+
 };
 // 서버정보
 Command['서버'] = function(message, cmdLine){
@@ -58,7 +61,7 @@ Command['서버'] = function(message, cmdLine){
         });
     */
     // TODO : http request 부분 아래로 수정하려 하는데 검토좀 부탁.
-    let requestUrl = apiUrl.apiContext + '/' +apiUrl.dfServerInfo + APIKEY;
+    let requestUrl = apiUrl.apiContext + '/' +apiUrl.dfServerInfo + DF_APIKEY;
     requestHttpApi(request)
     .then(result => {
         // TODO : server result handler
@@ -66,6 +69,11 @@ Command['서버'] = function(message, cmdLine){
         console.log(err);
         httpRequestFail(message);
     });
+}
+
+
+function checkApiCommend(message){
+    
 }
 
 
