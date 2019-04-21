@@ -10,11 +10,13 @@ const apiUrl = require('./properties/apiList.js');
 const client = new discord.Client();
 
 const request = require('request');
-
 const preFix = '~';
 
 // 던파 API key url
 const APIKEY = apiUrl.apiKey + token.dfToken;
+
+// 실제 명령어 구현
+var Command = {};
 
 // 토큰으로 로그인
 client.login(token.botToken);
@@ -35,19 +37,13 @@ client.on("message", message => {
         var cmdLine = message.content.split('~')[1];
         // 띄워쓰기로 문자열 구분
         var cmdLineFirst = cmdLine.split(' ')[0];
-
         Command[cmdLineFirst](message, cmdLine);
         console.log(cmdLineFirst);
     }
-    // function callback(result) {
-    //     message.reply(result);
-    // };
-    
 });
 
 
-// 실제 명령어 구현
-var Command = {};
+
 Command['경매'] = function(message, cmdLine){
     console.log('경매장 조회');
 };
@@ -62,14 +58,14 @@ Command['서버'] = function(message, cmdLine){
         });
     */
     // TODO : http request 부분 아래로 수정하려 하는데 검토좀 부탁.
-    axios.get(apiUrl.apiContext + '/' +apiUrl.dfServerInfo + APIKEY)
-    .then(response => {
-        message.reply(body);
-    })
-    .catch(err => {
+    let requestUrl = apiUrl.apiContext + '/' +apiUrl.dfServerInfo + APIKEY;
+    requestHttpApi(request)
+    .then(result => {
+        // TODO : server result handler
+    }).catch(err => {
         console.log(err);
         httpRequestFail(message);
-    })
+    });
 }
 
 
@@ -78,10 +74,28 @@ Command['서버'] = function(message, cmdLine){
  * @param {object} message target message object 
  */
 function httpRequestFail(message){
-   message.reply('api 요청에 실패하였습니다. 잠시 후 다시 시도해주세요.'); 
+    // TODO : 나중에 추가 헨들링 구현
+    message.reply('api 요청에 실패하였습니다. 잠시 후 다시 시도해주세요.'); 
 }
 
-
+/**
+ * send http request. return promise 
+ * @param {string} url api url
+ * @param {object} inputParams url params object 
+ */
+function requestHttpApi(url, inputParams) {
+    return Promise((resolve, reject) => {
+        axios.get(url, {
+            params : inputParams
+        })
+        .then(response => {
+            resolve(response);
+        })
+        .catch(err => {
+            reject(err);
+        })
+    });
+}
 
 
 
