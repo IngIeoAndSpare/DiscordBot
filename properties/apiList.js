@@ -1,15 +1,15 @@
 module.exports = {
     // base df api context
     apiContext : 'https://api.neople.co.kr/df/servers',
-    apiKey = '?apikey=',
-    dfServerInfo = 'df/servers',
+    apiKey : '?apikey=',
+    dfServerInfo : 'df/servers',
 
     // df auction api context
-    dfAuction = 'df/auction',
+    dfAuction : 'df/auction',
 
     // df item api context
-    dfItem = 'df/items',
+    dfItem : 'df/items',
 
     // df character api context
-    dfCharacter = '/characters'
+    dfCharacter : '/characters'
 }
