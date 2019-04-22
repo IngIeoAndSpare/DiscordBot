@@ -32,9 +32,9 @@ client.on("message", message => {
     // TODO : 각 content 프로퍼티 파일로 지정하여 불러오는 형식으로 실행.
     // XXX : function => prop[message]
 
-    if (message.content.startsWith('~')){
+    if (message.content.startsWith(preFix)){
         // Prefix를 제외한 문자열
-        var cmdLine = message.content.split('~')[1];
+        var cmdLine = message.content.split(preFix)[1];
         // 띄워쓰기로 문자열 구분
         var cmdLineFirst = cmdLine.split(' ')[0];
         Command[cmdLineFirst](message, cmdLine);
