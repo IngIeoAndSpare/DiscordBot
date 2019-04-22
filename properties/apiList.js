@@ -1,6 +1,6 @@
 module.exports = {
     // base df api context
-    apiContext : 'https://api.neople.co.kr/df/servers',
+    apiContext : 'https://api.neople.co.kr',
     apiKey : '?apikey=',
     dfServerInfo : 'df/servers',
 
