@@ -52,6 +52,10 @@ Command['경매'] = function(message, cmdLine){
 };
 // 서버정보
 Command['서버'] = function(message, cmdLine){
+    console.log('message');
+    console.log(message);
+    console.log('cmdLine');
+    console.log(cmdLine);
     /*
     request(apiUrl.apiContext + '/' +apiUrl.dfServerInfo + APIKEY,
         function (error, response, body) {
@@ -62,9 +66,10 @@ Command['서버'] = function(message, cmdLine){
     */
     // TODO : http request 부분 아래로 수정하려 하는데 검토좀 부탁.
     let requestUrl = apiUrl.apiContext + '/' +apiUrl.dfServerInfo + DF_APIKEY;
-    requestHttpApi(request)
+    requestHttpApi(requestUrl)
     .then(result => {
         // TODO : server result handler
+        console.log(result.data);
     }).catch(err => {
         console.log(err);
         httpRequestFail(message);
@@ -92,7 +97,7 @@ function httpRequestFail(message){
  * @param {object} inputParams url params object 
  */
 function requestHttpApi(url, inputParams) {
-    return Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         axios.get(url, {
             params : inputParams
         })
