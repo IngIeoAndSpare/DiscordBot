@@ -1,15 +1,14 @@
 // ===== module ======================
 const discord = require('discord.js'),
-      axios = require('axios');
-//      bufferutil = require('bufferutil'),
-//      crypto = require('crypto');
+      axios = require('axios'),
+      propertiesReader = require('properties-reader');
 
 // ===== properties ===================
-const token = require('./properties/token.json');
-const apiUrl = require('./properties/apiList.js');
-const client = new discord.Client();
+const token = require('./properties/token.json'),
+      apiUrl = require('./properties/apiList.js'),
+      property = propertiesReader('./properties/property.properties');
 
-const request = require('request');
+const client = new discord.Client();
 const preFix = '~';
 
 // 던파 API key url
@@ -44,27 +43,19 @@ client.on("message", message => {
 
 
 
-Command['경매'] = function(message, cmdLine){
+Command[property.get('df.api.message.market')] = function(message, cmdLine){
     console.log('경매장 조회');
     // XXX: cmdLine params 값 확인 필요.
 
 
 };
 // 서버정보
-Command['서버'] = function(message, cmdLine){
+Command[property.get('df.api.message.server')] = function(message, cmdLine){
     console.log('message');
     console.log(message);
     console.log('cmdLine');
     console.log(cmdLine);
-    /*
-    request(apiUrl.apiContext + '/' +apiUrl.dfServerInfo + APIKEY,
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                message.reply(body);
-            }
-        });
-    */
-    // TODO : http request 부분 아래로 수정하려 하는데 검토좀 부탁.
+
     let requestUrl = apiUrl.apiContext + '/' +apiUrl.dfServerInfo + DF_APIKEY;
     requestHttpApi(requestUrl)
     .then(result => {
@@ -79,6 +70,11 @@ Command['서버'] = function(message, cmdLine){
 
 function checkApiCommend(message){
     
+}
+
+function writeLog(message, cmdLine) {
+    console.log
+
 }
 
 
